@@ -41,3 +41,11 @@ https://openweathermap.org/api
 - Hourly forecast
 - Air Quality Index
 - Save favorite cities
+
+## Setup Instructions
+1. Clone the GitHub repository
+2. Open the project folder
+3. Create a file named config.js
+4. Add your OpenWeatherMap API key:
+   const API_KEY = "your_api_key_here";
+5. Open index.html in your browser
