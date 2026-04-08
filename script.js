@@ -21,6 +21,11 @@ async function getWeather() {
         );
 
         const data = await response.json();
+        if (data.cod !== 200) {
+            weatherDiv.innerHTML = "City not found";
+            loading.style.display = "none";
+            return;
+        }
 
         weatherDiv.innerHTML = `
             <h2>${data.name}</h2>
