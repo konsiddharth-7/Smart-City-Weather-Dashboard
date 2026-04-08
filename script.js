@@ -1,3 +1,5 @@
+let forecastData = [];
+
 async function getWeather() {
     const city = document.getElementById("cityInput").value;
     const loading = document.getElementById("loading");
@@ -37,25 +39,49 @@ async function getWeather() {
 }
 
 async function getForecast(city) {
-    const forecastDiv = document.getElementById("forecastData");
-
     const response = await fetch(
         `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
     );
 
     const data = await response.json();
 
+    // FILTER (HOF)
+    forecastData = data.list.filter(item => item.dt_txt.includes("18:00:00"));
+
+    displayForecast(forecastData);
+}
+
+// MAP (HOF)
+function displayForecast(dataArray) {
+    const forecastDiv = document.getElementById("forecastData");
+
     let forecastHTML = "<h2>5-Day Forecast</h2>";
 
-    for (let i = 0; i < data.list.length; i += 8) {
+    dataArray.map(item => {
         forecastHTML += `
             <div class="forecast-card">
-                <p>${data.list[i].dt_txt}</p>
-                <p>Temp: ${data.list[i].main.temp} °C</p>
-                <p>${data.list[i].weather[0].main}</p>
+                <p>${item.dt_txt}</p>
+                <p>Temp: ${item.main.temp} °C</p>
+                <p>${item.weather[0].main}</p>
             </div>
         `;
-    }
+    });
 
     forecastDiv.innerHTML = forecastHTML;
+}
+
+// FILTER BUTTON FUNCTION
+function filterWeather(type) {
+    const filteredData = forecastData.filter(item =>
+        item.weather[0].main === type
+    );
+    displayForecast(filteredData);
+}
+
+// SORT FUNCTION
+function sortTemp() {
+    const sortedData = [...forecastData].sort((a, b) =>
+        b.main.temp - a.main.temp
+    );
+    displayForecast(sortedData);
 }
