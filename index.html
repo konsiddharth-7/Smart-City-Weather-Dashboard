@@ -9,9 +9,8 @@
     <div class="container">
         <h1>Smart City Weather Dashboard</h1>
 
-        <input type="text" id="cityInput" placeholder="Enter city name">
-        <button onclick="getWeather()">Search</button>
-
+        <input type="text" id="cityInput" placeholder="Enter city name" onkeypress="if(event.key==='Enter') getWeather()">
+        
         <div>
             <button onclick="filterWeather('Rain')">Rain</button>
             <button onclick="filterWeather('Clear')">Clear</button>
