@@ -85,3 +85,7 @@ function sortTemp() {
     );
     displayForecast(sortedData);
 }
+
+function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+}
