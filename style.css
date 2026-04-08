@@ -47,3 +47,13 @@ button {
         width: 100%;
     }
 }
+
+.dark-mode {
+    background-color: #121212;
+    color: white;
+}
+
+.dark-mode .forecast-card {
+    background-color: #1e1e1e;
+    border-color: #444;
+}
