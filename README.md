@@ -75,3 +75,6 @@ The project will use JavaScript Array Higher-Order Functions such as:
 - Local storage for saving preferences
 - Debouncing for search
 - Pagination for forecast data
+
+## Live Demo
+https://smart-city-weather-dashboard-six.vercel.app/
