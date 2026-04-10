@@ -21,6 +21,7 @@ async function getWeather() {
         );
 
         const data = await response.json();
+        changeBackground(data.main.temp);
         if (data.cod !== 200) {
             weatherDiv.innerHTML = "City not found";
             loading.style.display = "none";
@@ -29,6 +30,7 @@ async function getWeather() {
 
         weatherDiv.innerHTML = `
             <h2>${data.name}</h2>
+            <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" />
             <p>Temperature: ${data.main.temp} °C</p>
             <p>Weather: ${data.weather[0].main}</p>
         `;
@@ -63,10 +65,13 @@ function displayForecast(dataArray) {
     let forecastHTML = "<h2>5-Day Forecast</h2>";
 
     dataArray.map(item => {
+        const icon = item.weather[0].icon;
+
         forecastHTML += `
             <div class="forecast-card">
-                <p>${item.dt_txt}</p>
-                <p>Temp: ${item.main.temp} °C</p>
+                <p>${item.dt_txt.split(" ")[0]}</p>
+                <img src="https://openweathermap.org/img/wn/${icon}@2x.png" />
+                <p>${item.main.temp} °C</p>
                 <p>${item.weather[0].main}</p>
             </div>
         `;
@@ -93,4 +98,14 @@ function sortTemp() {
 
 function toggleDarkMode() {
     document.body.classList.toggle("dark-mode");
+}
+
+function changeBackground(temp) {
+    if (temp < 15) {
+        document.body.style.background = "#007BFF"; 
+    } else if (temp < 30) {
+        document.body.style.background = "#28A745"; 
+    } else {
+        document.body.style.background = "#FF3B30"; 
+    }
 }
